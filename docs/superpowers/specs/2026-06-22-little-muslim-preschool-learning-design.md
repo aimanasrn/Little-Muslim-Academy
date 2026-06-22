@@ -588,15 +588,19 @@ The implementation plan should start from this target structure:
 
 ```text
 Little-Muslim-Academy/
+  .agents/
+    skills/
   apps/
     web/
     api/
   packages/
     shared/
   docs/
+    project-agents.md
     superpowers/
       specs/
       plans/
+  skills-lock.json
   .env.example
   package.json
   README.md
@@ -628,3 +632,47 @@ The design is successful if implementation produces a platform where:
 - Admins can manage and publish core learning content
 - Progress and quiz data are tracked per child profile
 - The system is ready to evolve into a real Malaysian-gateway-backed launch product
+
+## 18. Project Agent Workflow
+
+This repository includes project-local agent skills that can be actively used during development. They are part of the working setup and should be treated as build accelerators, especially for brand, landing page, and frontend visual execution.
+
+### 18.1 Installed project agents
+
+Current local agent skills live under `.agents/skills/` and are locked in `skills-lock.json`:
+
+- `brandkit`
+- `design-taste-frontend`
+- `gpt-taste`
+- `imagegen-frontend-web`
+
+### 18.2 Intended use in this project
+
+These agents are best used for:
+
+- Brand direction and visual identity exploration
+- Homepage and marketing page art direction
+- Section-by-section landing page composition
+- Frontend visual refinement for child-friendly and premium parent-facing surfaces
+- Image-driven mockups and design references for implementation
+
+### 18.3 Usage boundaries
+
+These agents support delivery, but they do not replace the platform architecture or product rules in this spec. The team should still follow the approved requirements for:
+
+- Bilingual UX
+- Parent and admin roles
+- Secure auth and payment access checks
+- Malaysian gateway readiness
+- Responsive and accessible implementation
+- Testing, seed data, and launch-hardening work
+
+### 18.4 Recommended application by phase
+
+- Phase 1: use agents to shape brand language, landing page direction, and the shared visual system
+- Phase 2: use agents to refine module presentation, illustration direction, and module-specific UX polish
+- Phase 3: use agents selectively for launch polish on public pages and high-visibility parent flows
+
+### 18.5 Documentation reference
+
+Agent-specific workflow guidance should be maintained in `docs/project-agents.md` so implementation plans can reference one project source of truth.
