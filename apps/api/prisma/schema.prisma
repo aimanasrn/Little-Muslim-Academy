@@ -56,6 +56,8 @@ model ChildProfile {
   updatedAt   DateTime   @updatedAt
   user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   progress    Progress[]
+
+  @@unique([id, userId])
 }
 
 model Module {
@@ -113,7 +115,7 @@ model Progress {
   createdAt      DateTime     @default(now())
   updatedAt      DateTime     @updatedAt
   user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-  childProfile   ChildProfile @relation(fields: [childProfileId], references: [id], onDelete: Cascade)
+  childProfile   ChildProfile @relation(fields: [childProfileId, userId], references: [id, userId], onDelete: Cascade)
   lesson         Lesson       @relation(fields: [lessonId], references: [id], onDelete: Cascade)
 
   @@unique([childProfileId, lessonId])
