@@ -17,5 +17,5 @@ export const loginSchema = z.object({
 
 export type Role = z.infer<typeof roleSchema>;
 export type AccessState = z.infer<typeof accessStateSchema>;
-export type RegisterInput = z.infer<typeof registerSchema>;
+export type RegisterInput = z.input<typeof registerSchema>;
 export type LoginInput = z.infer<typeof loginSchema>;

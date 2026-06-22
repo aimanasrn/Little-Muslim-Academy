@@ -16,4 +16,4 @@ export const checkoutRequestSchema = z.object({
 });
 
 export type PaymentStatus = z.infer<typeof paymentStatusSchema>;
-export type CheckoutRequest = z.infer<typeof checkoutRequestSchema>;
+export type CheckoutRequest = z.input<typeof checkoutRequestSchema>;
