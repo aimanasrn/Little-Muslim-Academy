@@ -778,7 +778,66 @@ The repository should eventually include:
 - payment provider placeholder documentation
 - bilingual content guidance
 
-## 21. Out Of Scope For First Build
+## 21. Project Agent Workflow
+
+This project includes project-local agents that should be involved during the build as creative and frontend support tools.
+
+Tracked installed agents:
+
+- `brandkit`
+- `design-taste-frontend`
+- `gpt-taste`
+- `imagegen-frontend-web`
+
+### 21.1 How they should be used
+
+These agents should support:
+
+- brand identity exploration
+- landing page and pricing page direction
+- mascot and visual concept exploration
+- public marketing polish
+- selective high-impact motion and presentation work
+
+They should not replace:
+
+- product architecture
+- backend design
+- payment logic
+- security decisions
+- database modeling
+- admin workflow design
+
+### 21.2 Recommended usage in this project
+
+- `brandkit`: define the visual identity, mascot direction, color personality, and parent-child brand tone for `Little Muslim Learning Adventure`
+- `design-taste-frontend`: shape the public marketing site, pricing page, and parent-facing conversion surfaces so they avoid generic SaaS layouts
+- `imagegen-frontend-web`: generate section concepts, hero references, world previews, and visual inspiration before implementation
+- `gpt-taste`: apply selectively to premium motion-rich marketing sections where it improves delight without hurting readability or preschool usability
+
+### 21.3 Delivery phases
+
+- foundation phase: brand direction, shared UI mood, landing-page identity
+- product phase: world-specific visual refinement and child-friendly interface polish
+- launch phase: final marketing polish and high-visibility parent flow cleanup
+
+### 21.4 Guardrails
+
+These agents must work within the approved product constraints:
+
+- bilingual Malay and English UI
+- Arabic and Jawi learning content support
+- child-friendly interaction sizing
+- parent-safe clarity
+- responsive behavior
+- accessibility basics
+- secure auth and payment enforcement
+
+### 21.5 Documentation
+
+Project-agent guidance should also live in `docs/project-agents.md` so implementation plans have a stable reference.
+
+## 22. Out Of Scope For First Build
 
 To keep the first implementation practical, defer:
 
@@ -789,7 +848,7 @@ To keep the first implementation practical, defer:
 - deep CMS version diffing
 - multi-tenant organization support
 
-## 22. Success Criteria
+## 23. Success Criteria
 
 The design is successful if the implementation results in a product where:
 
