@@ -7,5 +7,10 @@
     "build": "tsc -p tsconfig.json",
     "test": "vitest run",
     "db:seed": "tsx prisma/seed.ts"
+  },
+  "devDependencies": {
+    "tsx": "latest",
+    "typescript": "latest",
+    "vitest": "latest"
   }
 }
