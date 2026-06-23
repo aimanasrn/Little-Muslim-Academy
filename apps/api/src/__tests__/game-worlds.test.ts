@@ -9,5 +9,6 @@ describe("GET /game-worlds", () => {
     expect(response.status).toBe(200);
     expect(response.body.worlds).toHaveLength(6);
     expect(response.body.worlds[0].key).toBe("huruf-island");
+    expect(response.body.worlds[0].previewEnabled).toBeTypeOf("boolean");
   });
 });

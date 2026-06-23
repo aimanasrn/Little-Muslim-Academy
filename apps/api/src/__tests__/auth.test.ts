@@ -17,10 +17,27 @@ describe("POST /auth/signin", () => {
 
     expect(response.status).toBe(200);
     expect(response.body.token).toEqual(expect.any(String));
+    expect(response.body.user.email).toBe("parent@example.com");
     expect(response.body.user.role).toBe("parent");
+    expect(response.body.user.hasLifetimeAccess).toBe(true);
     expect(verifyJwt(response.body.token)).toMatchObject({
-      userId: "user_parent_demo",
+      userId: expect.any(String),
       role: "parent"
+    });
+  });
+
+  it("returns an admin session for seeded admin credentials", async () => {
+    const response = await request(createApp()).post("/auth/signin").send({
+      email: "admin@example.com",
+      password: "password123"
+    });
+
+    expect(response.status).toBe(200);
+    expect(response.body.user.email).toBe("admin@example.com");
+    expect(response.body.user.role).toBe("admin");
+    expect(verifyJwt(response.body.token)).toMatchObject({
+      userId: expect.any(String),
+      role: "admin"
     });
   });
 
@@ -52,6 +69,35 @@ describe("POST /auth/signin", () => {
 
     expect(response.status).toBe(400);
     expect(response.body).toEqual({ message: "Malformed JSON" });
+  });
+});
+
+describe("POST /auth/signup", () => {
+  it("creates a new parent account and returns a session", async () => {
+    const email = `new-parent-${Date.now()}@example.com`;
+    const response = await request(createApp()).post("/auth/signup").send({
+      email,
+      password: "password123"
+    });
+
+    expect(response.status).toBe(201);
+    expect(response.body.user.email).toBe(email);
+    expect(response.body.user.role).toBe("parent");
+    expect(response.body.user.hasLifetimeAccess).toBe(false);
+    expect(verifyJwt(response.body.token)).toMatchObject({
+      userId: expect.any(String),
+      role: "parent"
+    });
+  });
+
+  it("rejects duplicate emails", async () => {
+    const response = await request(createApp()).post("/auth/signup").send({
+      email: "parent@example.com",
+      password: "password123"
+    });
+
+    expect(response.status).toBe(409);
+    expect(response.body).toEqual({ message: "An account with this email already exists" });
   });
 });
 
@@ -95,5 +141,26 @@ describe("requireAuth", () => {
 
     expect(response.status).toBe(401);
     expect(response.body).toEqual({ message: "Unauthorized" });
+  });
+});
+
+describe("GET /auth/me", () => {
+  it("returns the current signed in user for a valid token", async () => {
+    const signInResponse = await request(createApp()).post("/auth/signin").send({
+      email: "parent@example.com",
+      password: "password123"
+    });
+
+    const response = await request(createApp())
+      .get("/auth/me")
+      .set("authorization", `Bearer ${signInResponse.body.token}`);
+
+    expect(response.status).toBe(200);
+    expect(response.body.user).toMatchObject({
+      id: expect.any(String),
+      email: "parent@example.com",
+      role: "parent",
+      hasLifetimeAccess: true
+    });
   });
 });
