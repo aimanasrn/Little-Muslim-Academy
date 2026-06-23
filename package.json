@@ -1,0 +1,15 @@
+{
+  "name": "little-muslim-academy",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace @little-muslim/web",
+    "dev:api": "npm run dev --workspace @little-muslim/api",
+    "build:web": "npm run build --workspace @little-muslim/web",
+    "build:api": "npm run build --workspace @little-muslim/api",
+    "test:api": "npm run test --workspace @little-muslim/api"
+  }
+}
