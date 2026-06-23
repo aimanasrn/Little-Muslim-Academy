@@ -43,6 +43,16 @@ describe("POST /auth/signin", () => {
     expect(response.status).toBe(400);
     expect(response.body).toEqual({ message: "Email and password are required" });
   });
+
+  it("returns 400 for malformed json", async () => {
+    const response = await request(createApp())
+      .post("/auth/signin")
+      .set("content-type", "application/json")
+      .send('{"email":"parent@example.com","password":"password123"');
+
+    expect(response.status).toBe(400);
+    expect(response.body).toEqual({ message: "Malformed JSON" });
+  });
 });
 
 describe("requireAuth", () => {
@@ -76,5 +86,14 @@ describe("requireAuth", () => {
         role: "parent"
       }
     });
+  });
+
+  it("returns 401 when the bearer token is invalid", async () => {
+    const response = await request(createProtectedApp())
+      .get("/protected")
+      .set("authorization", "Bearer not-a-real-token");
+
+    expect(response.status).toBe(401);
+    expect(response.body).toEqual({ message: "Unauthorized" });
   });
 });
