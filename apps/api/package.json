@@ -8,7 +8,13 @@
     "test": "vitest run",
     "db:seed": "tsx prisma/seed.ts"
   },
+  "dependencies": {
+    "express": "latest"
+  },
   "devDependencies": {
+    "@types/express": "latest",
+    "@types/supertest": "latest",
+    "supertest": "latest",
     "tsx": "latest",
     "typescript": "latest",
     "vitest": "latest"
