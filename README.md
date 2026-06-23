@@ -18,3 +18,5 @@ Task 4 verification note: the targeted auth test initially failed with a `404` b
 Task 4 verification note: the targeted auth test passed after the auth route and service wiring landed.
 Task 5 verification note: the seed coverage test initially failed because `apps/api/prisma/seed.ts` did not exist yet.
 Task 5 verification note: `npm.cmd run test --workspace @little-muslim/api -- src/__tests__/game-worlds.test.ts`, the existing API tests, and `npm.cmd run build:api` all pass after the Prisma 7 schema/config/client wiring landed.
+Task 6 verification note: the `GET /game-worlds` and `POST /payments/checkout` tests initially failed with `404` because those routes did not exist yet.
+Task 6 verification note: the new world and payment tests, the existing API tests, and `npm.cmd run build:api` all pass after the route wiring landed.
