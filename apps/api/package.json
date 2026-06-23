@@ -9,14 +9,14 @@
     "db:seed": "tsx prisma/seed.ts"
   },
   "dependencies": {
-    "express": "latest"
+    "express": "5.2.1"
   },
   "devDependencies": {
-    "@types/express": "latest",
-    "@types/supertest": "latest",
-    "supertest": "latest",
-    "tsx": "latest",
-    "typescript": "latest",
-    "vitest": "latest"
+    "@types/express": "5.0.6",
+    "@types/supertest": "7.2.0",
+    "supertest": "7.2.2",
+    "tsx": "4.22.4",
+    "typescript": "6.0.3",
+    "vitest": "4.1.9"
   }
 }
