@@ -4,12 +4,15 @@ import { hashPassword, verifyPassword } from "../../lib/password.js";
 const parentUser = {
   id: "user_parent_demo",
   email: "parent@example.com",
-  passwordHash: hashPassword("password123"),
+  passwordHash: await hashPassword("password123"),
   role: "parent"
 } as const;
 
-export function signIn(email: string, password: string) {
-  if (email !== parentUser.email || !verifyPassword(password, parentUser.passwordHash)) {
+export async function signIn(email: string, password: string) {
+  if (
+    email !== parentUser.email ||
+    !(await verifyPassword(password, parentUser.passwordHash))
+  ) {
     return null;
   }
 

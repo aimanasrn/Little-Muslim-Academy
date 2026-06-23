@@ -1,20 +1,11 @@
-import { createHash, timingSafeEqual } from "node:crypto";
+import bcrypt from "bcryptjs";
 
-function digestPassword(password: string) {
-  return createHash("sha256").update(password).digest("hex");
-}
+const PASSWORD_SALT_ROUNDS = 10;
 
 export function hashPassword(password: string) {
-  return digestPassword(password);
+  return bcrypt.hash(password, PASSWORD_SALT_ROUNDS);
 }
 
 export function verifyPassword(password: string, hash: string) {
-  const passwordBuffer = Buffer.from(digestPassword(password));
-  const hashBuffer = Buffer.from(hash);
-
-  if (passwordBuffer.length !== hashBuffer.length) {
-    return false;
-  }
-
-  return timingSafeEqual(passwordBuffer, hashBuffer);
+  return bcrypt.compare(password, hash);
 }
