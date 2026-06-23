@@ -3,20 +3,20 @@
   "private": true,
   "type": "module",
   "files": [
-    "src"
+    "dist"
   ],
-  "main": "./src/index.ts",
-  "types": "./src/index.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc -p tsconfig.json"
+    "build": "node -e \"const fs = require('fs'); const path = require('path'); const pkgDir = path.dirname(process.env.npm_package_json); fs.rmSync(path.join(pkgDir, 'dist'), { recursive: true, force: true });\" && tsc -p tsconfig.json --ignoreDeprecations 6.0 --rootDir src"
   },
   "devDependencies": {
     "typescript": "latest"
   },
   "exports": {
     ".": {
-      "types": "./src/index.ts",
-      "default": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
     }
   }
 }
